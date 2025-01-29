@@ -1,33 +1,29 @@
-import { Injectable } from "@nestjs/common";
-import { CreateVenueTypeDto } from "./dto/create-venue_type.dto";
-import { UpdateVenueTypeDto } from "./dto/update-venue_type.dto";
-import { InjectModel } from "@nestjs/sequelize";
-import { VenueType } from "./models/venue_type.mdel";
+import { Injectable } from '@nestjs/common';
+import { CreateVenueTypeDto } from './dto/create-venue_type.dto';
+import { UpdateVenueTypeDto } from './dto/update-venue_type.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { VenueType } from './model/venue_type.model';
 
 @Injectable()
 export class VenueTypeService {
-  constructor(@InjectModel(VenueType) private venueType: typeof VenueType) {}
+  constructor(@InjectModel(VenueType) private venueTypeModel: typeof VenueType){}
   create(createVenueTypeDto: CreateVenueTypeDto) {
-    return this.venueType.create(createVenueTypeDto);
+    return this.venueTypeModel.create(createVenueTypeDto)
   }
 
   findAll() {
-    return this.venueType.findAll();
+    return this.venueTypeModel.findAll({ include: { all: true } });
   }
 
   findOne(id: number) {
-    return this.venueType.findByPk(id);
+    return this.venueTypeModel.findByPk(id)
   }
 
-  async update(id: number, updateVenueTypeDto: UpdateVenueTypeDto) {
-    const venue = await this.venueType.update(updateVenueTypeDto, {
-      where: { id },
-      returning: true,
-    });
-    return venue[1][0]
+  update(id: number, updateVenueTypeDto: UpdateVenueTypeDto) {
+    return this.venueTypeModel.update(updateVenueTypeDto,{where:{id},returning:true})
   }
 
   remove(id: number) {
-    return this.venueType.destroy({ where: { id } });
+    return this.venueTypeModel.destroy({where:{id}})
   }
 }

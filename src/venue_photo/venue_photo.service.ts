@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVenuePhotoDto } from './dto/create-venue_photo.dto';
 import { UpdateVenuePhotoDto } from './dto/update-venue_photo.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { VenuePhoto } from './model/venue_photo.model';
 
 @Injectable()
 export class VenuePhotoService {
+  constructor(@InjectModel(VenuePhoto) private venuePhotoModel: typeof VenuePhoto) {}
   create(createVenuePhotoDto: CreateVenuePhotoDto) {
-    return 'This action adds a new venuePhoto';
+    return this.venuePhotoModel.create(createVenuePhotoDto);
   }
 
   findAll() {
-    return `This action returns all venuePhoto`;
+    return this.venuePhotoModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} venuePhoto`;
+    return this.venuePhotoModel.findByPk(id);
   }
 
   update(id: number, updateVenuePhotoDto: UpdateVenuePhotoDto) {
-    return `This action updates a #${id} venuePhoto`;
+    return this.venuePhotoModel.update(updateVenuePhotoDto, {
+      where: { id },
+      returning: true,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} venuePhoto`;
+    return this.venuePhotoModel.destroy({ where: { id } });
   }
 }

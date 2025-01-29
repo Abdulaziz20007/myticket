@@ -1,3 +1,3 @@
-export class UpdateLangDto {
-  name?: string;
+export class UpdateLangDto{
+    name?:string
 }

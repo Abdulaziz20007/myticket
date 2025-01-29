@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
-import { SeatTypeService } from "./seat_type.service";
-import { SeatTypeController } from "./seat_type.controller";
-import { SequelizeModule } from "@nestjs/sequelize";
-import { SeatType } from "./models/seat_type.model";
+import { Module } from '@nestjs/common';
+import { SeatTypeService } from './seat_type.service';
+import { SeatTypeController } from './seat_type.controller';
+import { SeatType } from './model/seat_type.model';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
   imports: [SequelizeModule.forFeature([SeatType])],

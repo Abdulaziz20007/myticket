@@ -1,8 +1,8 @@
 export class CreateAdminDto {
   name: string;
-  login: string;
-  hashedPassword: string;
-  isActive: boolean;
-  isCreator: boolean;
-  hashedRefreshToken: string;
+  email: string;
+  hashed_password: string;
+  is_active: boolean;
+  is_creator: boolean;
+  hashed_refresh_token: string;
 }

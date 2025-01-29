@@ -1,3 +1,3 @@
 export class CreateDeliveryMethodDto {
-  name: string;
+    name:string
 }

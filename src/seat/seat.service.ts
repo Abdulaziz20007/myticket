@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSeatDto } from './dto/create-seat.dto';
 import { UpdateSeatDto } from './dto/update-seat.dto';
+import { Seat } from './model/seat.model';
+import { InjectModel } from '@nestjs/sequelize';
 
 @Injectable()
 export class SeatService {
+  constructor(@InjectModel(Seat) private seatModel: typeof Seat) {}
+
   create(createSeatDto: CreateSeatDto) {
-    return 'This action adds a new seat';
+    return this.seatModel.create(createSeatDto);
   }
 
   findAll() {
-    return `This action returns all seat`;
+    return this.seatModel.findAll({ include: { all: true } });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} seat`;
+    return this.seatModel.findByPk(id);
   }
 
   update(id: number, updateSeatDto: UpdateSeatDto) {
-    return `This action updates a #${id} seat`;
+      return this.seatModel.update(updateSeatDto, {
+        where: { id },
+        returning: true,
+      });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} seat`;
+    return this.seatModel.destroy({ where: { id } });
   }
 }

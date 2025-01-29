@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { Customer } from './model/customer.model';
 
 @Injectable()
 export class CustomerService {
+  constructor(@InjectModel(Customer) private customerModel: typeof Customer) {}
+
   create(createCustomerDto: CreateCustomerDto) {
-    return 'This action adds a new customer';
+    return this.customerModel.create(createCustomerDto);
   }
 
   findAll() {
-    return `This action returns all customer`;
+    return this.customerModel.findAll({ include: { all: true } });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} customer`;
+    return this.customerModel.findByPk(id);
   }
 
   update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return `This action updates a #${id} customer`;
+    return this.customerModel.update(updateCustomerDto, {
+      where: { id },
+      returning: true,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} customer`;
+    return this.customerModel.destroy({ where: { id } });
   }
 }

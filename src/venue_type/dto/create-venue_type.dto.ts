@@ -1,3 +1,3 @@
 export class CreateVenueTypeDto {
-  name: string;
+    name:string
 }

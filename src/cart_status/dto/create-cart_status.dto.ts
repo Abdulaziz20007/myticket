@@ -1,3 +1,3 @@
 export class CreateCartStatusDto {
-  name: string;
+    name:string
 }

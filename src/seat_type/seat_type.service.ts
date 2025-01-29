@@ -1,33 +1,30 @@
-import { Injectable } from "@nestjs/common";
-import { CreateSeatTypeDto } from "./dto/create-seat_type.dto";
-import { UpdateSeatTypeDto } from "./dto/update-seat_type.dto";
-import { InjectModel } from "@nestjs/sequelize";
-import { SeatType } from "./models/seat_type.model";
+import { Injectable } from '@nestjs/common';
+import { CreateSeatTypeDto } from './dto/create-seat_type.dto';
+import { UpdateSeatTypeDto } from './dto/update-seat_type.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { SeatType } from './model/seat_type.model';
 
 @Injectable()
 export class SeatTypeService {
-  constructor(@InjectModel(SeatType) private seatType: typeof SeatType) {}
+  constructor(@InjectModel(SeatType) private seatTypemodel:typeof SeatType){}
   create(createSeatTypeDto: CreateSeatTypeDto) {
-    return this.seatType.create(createSeatTypeDto);
+    return this.seatTypemodel.create(createSeatTypeDto)
   }
 
   findAll() {
-    return this.seatType.findAll();
+    return this.seatTypemodel.findAll({ include: { all: true } });
   }
 
-  findOne(id: number) {
-    return this.seatType.findByPk(id);
+ async findOne(id: number) {
+    const findUser = await this.seatTypemodel.findByPk(id)
+    return findUser
   }
 
-  async update(id: number, updateSeatTypeDto: UpdateSeatTypeDto) {
-    const seat = await this.seatType.update(updateSeatTypeDto, {
-      where: { id },
-      returning: true,
-    });
-    return seat[1][0];
+  update(id: number, updateSeatTypeDto: UpdateSeatTypeDto) {
+    return this.seatTypemodel.update(updateSeatTypeDto,{where:{id}, returning:true})
   }
 
   remove(id: number) {
-    return this.seatType.destroy({ where: { id } });
+    return this.seatTypemodel.destroy({where:{id}})
   }
 }

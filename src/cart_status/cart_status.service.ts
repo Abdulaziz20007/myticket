@@ -1,33 +1,32 @@
-import { Injectable } from "@nestjs/common";
-import { CreateCartStatusDto } from "./dto/create-cart_status.dto";
-import { UpdateCartStatusDto } from "./dto/update-cart_status.dto";
-import { InjectModel } from "@nestjs/sequelize";
-import { CartStatus } from "./models/cart_status.model";
+import { Injectable } from '@nestjs/common';
+import { CreateCartStatusDto } from './dto/create-cart_status.dto';
+import { UpdateCartStatusDto } from './dto/update-cart_status.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { CartStatus } from './model/cart_status.model';
 
 @Injectable()
 export class CartStatusService {
-  constructor(@InjectModel(CartStatus) private cartStatus: typeof CartStatus) {}
+  constructor(@InjectModel(CartStatus) private cartStatusModel:typeof CartStatus){}
   create(createCartStatusDto: CreateCartStatusDto) {
-    return this.cartStatus.create(createCartStatusDto);
+    return this.cartStatusModel.create(createCartStatusDto);
   }
 
   findAll() {
-    return this.cartStatus.findAll();
+    return this.cartStatusModel.findAll();
   }
 
   findOne(id: number) {
-    return this.cartStatus.findByPk(id);
+    return this.cartStatusModel.findByPk(id);
   }
 
-  async update(id: number, updateCartStatusDto: UpdateCartStatusDto) {
-    const status = await this.cartStatus.update(updateCartStatusDto, {
+  update(id: number, updateCartStatusDto: UpdateCartStatusDto) {
+    return this.cartStatusModel.update(updateCartStatusDto, {
       where: { id },
       returning: true,
     });
-    return status[1][0];
   }
 
   remove(id: number) {
-    return this.cartStatus.destroy({ where: { id } });
+    return this.cartStatusModel.destroy({ where: { id } });
   }
 }

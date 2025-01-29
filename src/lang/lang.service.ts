@@ -1,22 +1,19 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { Lang } from "./models/lang.model";
+import { Lang } from "./model/lang.model";
 import { CreateLangDto } from "./dto/create-lang.dto";
 import { UpdateLangDto } from "./dto/update-lang.dto";
 
 @Injectable()
 export class LangService {
   constructor(@InjectModel(Lang) private langModel: typeof Lang) {}
-
   async createLang(createLangDto: CreateLangDto): Promise<Lang> {
     const newLang = await this.langModel.create(createLangDto);
     return newLang;
   }
-
   async findAllLang(): Promise<Lang[]> {
     return this.langModel.findAll();
   }
-
   async findLangById(id: number): Promise<Lang | null> {
     return this.langModel.findOne({ where: { id } });
   }
@@ -35,11 +32,9 @@ export class LangService {
 
   async deleteLangById(id: number): Promise<string> {
     const res = await this.langModel.destroy({ where: { id } });
-    console.log(res);
-    if (!res) {
-      return `Bunday til topilmadi`;
+    if (res == 1) {
+      return `${id} langauge deleted`;
     }
-
-    return `${id}lik til o'chirildi`;
+    return "Language does not exists";
   }
 }
