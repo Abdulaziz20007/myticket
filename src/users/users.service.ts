@@ -6,6 +6,7 @@ import { User } from "./model/user.model";
 import { RolesService } from "src/roles/roles.service";
 import { Role } from "src/roles/model/role.model";
 import { NotFoundError } from "rxjs";
+import { AddRoleDto } from "./dto/add-role.dto";
 
 @Injectable()
 export class UsersService {
@@ -33,11 +34,11 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userModel.findAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.userModel.findByPk(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -51,7 +52,26 @@ export class UsersService {
   async findUserByEmail(email: string) {
     return this.userModel.findOne({
       where: { email },
-      include: { all: true },
+      include: {
+        model: Role,
+        attributes: ["value"],
+        through: { attributes: [] },
+      },
     });
+  }
+
+  async addRole(addRoleDto: AddRoleDto) {
+    const user = await this.userModel.findByPk(addRoleDto.userId);
+    const role = await this.roleService.findRoleByValue(addRoleDto.value);
+    if (role && user) {
+      await user.$add("roles", role.id);
+      await user.save();
+      const updatedUser = await this.userModel.findByPk(addRoleDto.userId, {
+        include: { all: true },
+      });
+      return updatedUser;
+    }
+
+    throw new NotFoundException("Foydalanuvchi yoki role noto'g'ri");
   }
 }

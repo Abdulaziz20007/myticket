@@ -58,6 +58,8 @@ import { Role } from "./roles/model/role.model";
 import { UsersModule } from "./users/users.module";
 import { User } from "./users/model/user.model";
 import { UserRole } from "./users/model/user-role-model";
+import { AuthModule } from "./auth/auth.module";
+import { AdminAuthModule } from "./admin_auth/admin_auth.module";
 
 @Module({
   imports: [
@@ -135,6 +137,8 @@ import { UserRole } from "./users/model/user-role-model";
     BookingStatusModule,
     RolesModule,
     UsersModule,
+    AuthModule,
+    AdminAuthModule,
   ],
   controllers: [],
   providers: [],

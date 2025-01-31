@@ -7,7 +7,7 @@ interface IRolesCreationAttr{
     description:string
 }
 
-@Table({ tableName: "roles", timestamps: false })
+@Table({ tableName: "roles", timestamps: true })
 export class Role extends Model<Role, IRolesCreationAttr> {
   @Column({
     type: DataType.INTEGER,

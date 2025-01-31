@@ -6,24 +6,24 @@ import {
   Post,
   UsePipes,
 } from "@nestjs/common";
-import { AuthService } from "./auth.service";
+import { AdminAuthService } from "./admin_auth.service";
 import { CreateUserDto } from "../users/dto/create-user.dto";
-import { SignInDto } from "./dto/sign-in.dto";
+import { SignInDto } from "../auth/dto/sign-in.dto";
 import { CustomValidationPipe } from "../pipe/validation.pipe";
 
-@Controller("auth")
-export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+@Controller("admin-auth")
+export class AdminAuthController {
+  constructor(private readonly adminAuthService: AdminAuthService) {}
 
   @Post("signup")
   async signUp(@Body() createUserDto: CreateUserDto) {
-    return this.authService.signUp(createUserDto);
+    return this.adminAuthService.signUp(createUserDto);
   }
 
   @HttpCode(HttpStatus.OK)
   @UsePipes(new CustomValidationPipe())
-  @Post("signin")
+  @Post("signin") 
   async signIn(@Body() SignInDto: SignInDto) {
-    return this.authService.signIn(SignInDto);
+    return this.adminAuthService.signIn(SignInDto);
   }
 }

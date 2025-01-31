@@ -1,9 +1,15 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { UsersService } from "src/users/users.service";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import * as bcrypt from "bcrypt";
 import { JwtService } from "@nestjs/jwt";
 import { User } from "../users/model/user.model";
+import { SignInDto } from "./dto/sign-in.dto";
 
 @Injectable()
 export class AuthService {
@@ -35,5 +41,30 @@ export class AuthService {
     createUserDto.password = hashedPassword;
     const newUser = await this.userService.create(createUserDto);
     return this.generateToken(newUser);
+  }
+
+  async signIn(signInDto: SignInDto) {
+    const user = await this.userService.findUserByEmail(signInDto.email);
+    if (!user) {
+      throw new UnauthorizedException("Email yoki parol noto'g'ri");
+    }
+
+    console.log(user.roles[0].value);
+
+    const isValidPassword = await bcrypt.compare(
+      signInDto.password,
+      user.password
+    );
+    if (!isValidPassword) {
+      throw new UnauthorizedException("Email yoki parol noto'g'ri");
+    }
+
+    for (const role of user.roles) {
+      if (role.value === signInDto.value.toUpperCase()) {
+        return this.generateToken(user);
+      }
+    }
+
+    throw new ForbiddenException("Sizda bunday role yo'q");
   }
 }
