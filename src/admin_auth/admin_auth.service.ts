@@ -40,11 +40,14 @@ export class AdminAuthService {
       throw new BadRequestException("Admin already exists");
     }
 
-    const hashedPassword = await bcrypt.hash(createAdminDto.password, 15);
+    const hashedPassword = await bcrypt.hash(
+      createAdminDto.hashed_password,
+      15
+    );
     const newAdmin = await this.adminService.create({
       name: createAdminDto.name,
       email: createAdminDto.email,
-      password: hashedPassword,
+      hashed_password: hashedPassword,
       is_active: true,
       is_creator: false,
       hashed_refresh_token: "",
