@@ -11,6 +11,8 @@ import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { Admin } from "../admin/model/admin.model";
 import { AdminService } from "../admin/admin.service";
+import { CreateAdminDto } from "src/admin/dto/create-admin.dto";
+import { SignInAdminDto } from "./dto/signin-admin.dto";
 
 @Injectable()
 export class AdminAuthService {
@@ -29,38 +31,34 @@ export class AdminAuthService {
     return { token: this.jwtService.sign(payload) };
   }
 
-  async signUp(createUserDto: CreateUserDto) {
+  async signUp(createAdminDto: CreateAdminDto) {
     const candidate = await this.adminService.findOne({
-      where: { email: createUserDto.email },
+      where: { email: createAdminDto.email },
     });
 
     if (candidate) {
       throw new BadRequestException("Admin already exists");
     }
 
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 15);
+    const hashedPassword = await bcrypt.hash(createAdminDto.password, 15);
     const newAdmin = await this.adminService.create({
-      name: createUserDto.name,
-      email: createUserDto.email,
-      hashed_password: hashedPassword,
+      name: createAdminDto.name,
+      email: createAdminDto.email,
+      password: hashedPassword,
       is_active: true,
       is_creator: false,
-      hashed_refresh_token: null,
+      hashed_refresh_token: "",
     });
 
     return this.generateToken(newAdmin);
   }
 
-  async signIn(signInDto: SignInDto) {
+  async signIn(signInDto: SignInAdminDto) {
     const admin = await this.adminService.findOne({
       where: { email: signInDto.email },
     });
     if (!admin) {
-      throw new UnauthorizedException("Email or password is incorrect");
-    }
-
-    if (!admin.is_active) {
-      throw new ForbiddenException("Admin is not active");
+      throw new UnauthorizedException("Email yoki parol noto'g'ri");
     }
 
     const isValidPassword = await bcrypt.compare(
@@ -68,9 +66,13 @@ export class AdminAuthService {
       admin.hashed_password
     );
     if (!isValidPassword) {
-      throw new UnauthorizedException("Email or password is incorrect");
+      throw new UnauthorizedException("Email yoki parol noto'g'ri");
     }
 
     return this.generateToken(admin);
+  }
+
+  async findOne(id: number) {
+    return this.adminService.findOne({ where: { id } });
   }
 }

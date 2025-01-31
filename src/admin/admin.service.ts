@@ -16,8 +16,8 @@ export class AdminService {
     return this.adminModel.findAll({ include: { all: true } });
   }
 
-  findOne(id: number) {
-    return this.adminModel.findByPk(id);
+  findOne(options: any) {
+    return this.adminModel.findOne(options);
   }
 
   update(id: number, updateAdminDto: UpdateAdminDto) {
