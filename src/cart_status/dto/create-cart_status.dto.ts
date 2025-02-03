@@ -1,3 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateCartStatusDto {
-    name:string
+  @ApiProperty({
+    description: "Savatcha holati nomi",
+    example: "Faol",
+  })
+  name: string;
 }

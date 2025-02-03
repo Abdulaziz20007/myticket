@@ -1,3 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateTicketStatusDto {
-    name:string
+  @ApiProperty({
+    description: "Chipta holati nomi",
+    example: "Sotilgan",
+  })
+  name: string;
 }

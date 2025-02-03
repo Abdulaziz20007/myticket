@@ -1,4 +1,15 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateRegionDto {
-    name:string
-    regionId:number
+  @ApiProperty({
+    description: "Viloyat nomi",
+    example: "Toshkent",
+  })
+  name: string;
+
+  @ApiProperty({
+    description: "Viloyat ID raqami",
+    example: 1,
+  })
+  regionId: number;
 }

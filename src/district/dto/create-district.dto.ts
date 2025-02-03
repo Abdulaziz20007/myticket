@@ -1,3 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateDistrictDto {
-    name:string
+  @ApiProperty({
+    description: "Tuman nomi",
+    example: "Chilonzor",
+  })
+  name: string;
 }

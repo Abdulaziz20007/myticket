@@ -1,4 +1,9 @@
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateSeatTypeDto {
-    name:string
+  @ApiProperty({
+    description: "O'rindiq turi nomi",
+    example: "VIP",
+  })
+  name: string;
 }
