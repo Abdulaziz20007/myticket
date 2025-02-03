@@ -1,6 +1,6 @@
 export class CreateEventDto {
   name: string;
-  photo: string;
+  photo: any;
   start_date: string;
   start_time: string;
   finish_date: string;

@@ -59,6 +59,10 @@ import { UsersModule } from "./users/users.module";
 import { User } from "./users/model/user.model";
 import { UserRole } from "./users/model/user-role-model";
 import { AuthModule } from "./auth/auth.module";
+import { SingleFileService } from "./single-file.service";
+import { MultiFileService } from "./multi-file.service";
+import { MultiFileController } from "./multi-file.controller";
+import { SingleFileController } from "./single-file.controller";
 
 @Module({
   imports: [
@@ -105,7 +109,7 @@ import { AuthModule } from "./auth/auth.module";
       ],
       autoLoadModels: true,
       sync: { alter: true },
-      logging: true,
+      logging: false,
     }),
     LangModule,
     HumanCategoryModule,
@@ -137,7 +141,7 @@ import { AuthModule } from "./auth/auth.module";
     UsersModule,
     AuthModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [SingleFileController, MultiFileController],
+  providers: [SingleFileService, MultiFileService],
 })
 export class AppModule {}

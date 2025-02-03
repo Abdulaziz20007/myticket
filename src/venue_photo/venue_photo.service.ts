@@ -3,7 +3,7 @@ import { CreateVenuePhotoDto } from "./dto/create-venue_photo.dto";
 import { UpdateVenuePhotoDto } from "./dto/update-venue_photo.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { VenuePhoto } from "./model/venue_photo.model";
-import AWS from "aws-sdk";
+import * as AWS from "aws-sdk";
 
 @Injectable()
 export class VenuePhotoService {
@@ -16,12 +16,42 @@ export class VenuePhotoService {
   constructor(
     @InjectModel(VenuePhoto) private venuePhotoModel: typeof VenuePhoto
   ) {}
-  create(createVenuePhotoDto: CreateVenuePhotoDto, file: any) {
+  async create(createVenuePhotoDto: CreateVenuePhotoDto, file: any) {
     const { originalname } = file;
 
-    return this.venuePhotoModel.create(createVenuePhotoDto);
+    return this.venuePhotoModel.create({
+      ...createVenuePhotoDto,
+      url: (
+        await this.s3_upload(
+          file.buffer,
+          this.AWS_S3_BUCKET,
+          originalname,
+          file.mimetype
+        )
+      ).Location,
+    });
   }
 
+  async s3_upload(file: any, bucket: any, name: any, mimetype: any) {
+    const params = {
+      Bucket: bucket,
+      Key: String(name),
+      Body: file,
+      ContentType: mimetype,
+      ContentDisposition: "inline",
+      CreateBucketConfiguration: {
+        LocationConstraint: "ap-south-1",
+      },
+    };
+
+    try {
+      const s3Response = await this.s3.upload(params).promise();
+      return s3Response;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  }
 
   findAll() {
     return this.venuePhotoModel.findAll();
