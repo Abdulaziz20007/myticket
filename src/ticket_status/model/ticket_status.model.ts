@@ -1,8 +1,8 @@
-import {  Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
-import { Ticket } from "src/ticket/model/ticket.model";
+import { Column, DataType, HasOne, Model, Table } from "sequelize-typescript";
+import { Ticket } from "../../ticket/model/ticket.model";
 
-interface createTicketStatusAttr{
-    name:string
+interface createTicketStatusAttr {
+  name: string;
 }
 
 @Table({ tableName: "ticket_status" })
@@ -19,6 +19,6 @@ export class TicketStatus extends Model<TicketStatus, createTicketStatusAttr> {
   })
   name: string;
 
-  @HasOne(()=>Ticket)
-  ticketss:Ticket
+  @HasOne(() => Ticket)
+  ticketss: Ticket;
 }

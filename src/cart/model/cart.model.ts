@@ -1,14 +1,21 @@
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { Booking } from "src/booking/model/booking.model";
-import { CartItem } from "src/cart_item/model/cart_item.model";
-import { CartStatus } from "src/cart_status/model/cart_status.model";
-import { Customer } from "src/customer/model/customer.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Booking } from "../../booking/model/booking.model";
+import { CartItem } from "../../cart_item/model/cart_item.model";
+import { CartStatus } from "../../cart_status/model/cart_status.model";
+import { Customer } from "../../customer/model/customer.model";
 
-
-interface ICartCreationAttr{
-    customerId:number,
-    finishedAt:string,
-    statusId:number
+interface ICartCreationAttr {
+  customerId: number;
+  finishedAt: string;
+  statusId: number;
 }
 
 @Table({ tableName: "cart", timestamps: true })

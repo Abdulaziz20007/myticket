@@ -1,14 +1,22 @@
-import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
-import { Booking } from "src/booking/model/booking.model";
-import { Ticket } from "src/ticket/model/ticket.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasOne,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Booking } from "../../booking/model/booking.model";
+import { Ticket } from "../../ticket/model/ticket.model";
 
-interface IDiscountCouponAttr{
-    ticketId:number,
-    discount_code:string,
-    discount_percentage:number,
-    valid_from:string,
-    valid_to:string,
-    status:string
+interface IDiscountCouponAttr {
+  ticketId: number;
+  discount_code: string;
+  discount_percentage: number;
+  valid_from: string;
+  valid_to: string;
+  status: string;
 }
 
 @Table({ tableName: "discount_coupun" })

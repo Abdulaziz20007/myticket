@@ -1,17 +1,22 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Customer } from "src/customer/model/customer.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Customer } from "../../customer/model/customer.model";
 
-
-interface ICustomerCardCreationAttr{
-    customerId:number,
-    name:string,
-    phone:string,
-    number:string,
-    year:number,
-    month:number,
-    is_active:boolean,
-    is_main:boolean
-
+interface ICustomerCardCreationAttr {
+  customerId: number;
+  name: string;
+  phone: string;
+  number: string;
+  year: number;
+  month: number;
+  is_active: boolean;
+  is_main: boolean;
 }
 
 @Table({ tableName: "customer_card" })

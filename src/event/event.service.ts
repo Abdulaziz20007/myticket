@@ -3,7 +3,7 @@ import { CreateEventDto } from "./dto/create-event.dto";
 import { UpdateEventDto } from "./dto/update-event.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { Event } from "./model/event.model";
-import { Lang } from "src/lang/models/lang.model";
+import { Lang } from "../lang/models/lang.model";
 import * as AWS from "aws-sdk";
 
 @Injectable()

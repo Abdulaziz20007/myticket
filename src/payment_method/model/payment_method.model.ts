@@ -1,9 +1,8 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
-import { Booking } from "src/booking/model/booking.model";
+import { Booking } from "../../booking/model/booking.model";
 
-
-interface createPayMethodAttr{
-    name:string
+interface createPayMethodAttr {
+  name: string;
 }
 
 @Table({ tableName: "payment_method" })
@@ -20,6 +19,6 @@ export class PaymentMethod extends Model<PaymentMethod, createPayMethodAttr> {
   })
   name: string;
 
-  @HasMany(()=>Booking)
-  bookings:Booking[]
+  @HasMany(() => Booking)
+  bookings: Booking[];
 }

@@ -1,9 +1,9 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { BookingStatus } from "src/booking_status/model/booking_status.model";
-import { Cart } from "src/cart/model/cart.model";
-import { DeliveryMethod } from "src/delivery_method/model/delivery_method.model";
-import { DiscountCoupon } from "src/discount_coupon/model/discount_coupon.model";
-import { PaymentMethod } from "src/payment_method/model/payment_method.model";
+import { BookingStatus } from "../../booking_status/model/booking_status.model";
+import { Cart } from "../../cart/model/cart.model";
+import { DeliveryMethod } from "../../delivery_method/model/delivery_method.model";
+import { DiscountCoupon } from "../../discount_coupon/model/discount_coupon.model";
+import { PaymentMethod } from "../../payment_method/model/payment_method.model";
 
 
 interface IBookingCreationAttr {

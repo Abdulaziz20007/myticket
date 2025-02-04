@@ -14,23 +14,23 @@ export class UsersService {
   constructor(
     @InjectModel(User)
     private userModel: typeof User,
-    // @InjectModel(Role)
-    // private roleModel: typeof Role,
-    // @InjectModel(UserRole)
-    // private userRoleModel: typeof UserRole,
+    @InjectModel(Role)
+    private roleModel: typeof Role,
+    @InjectModel(UserRole)
+    private userRoleModel: typeof UserRole,
     private readonly roleService: RolesService
   ) {}
 
   async create(createUserDto: CreateUserDto) {
     const newUser = await this.userModel.create(createUserDto);
     const role = await this.roleService.findRoleByValue(createUserDto.value);
-    // const role2 = await this.roleModel.findOne({
-    //   where: { value: createUserDto.value.toLocaleUpperCase() },
-    // });
+    const role2 = await this.roleModel.findOne({
+      where: { value: createUserDto.value.toLocaleUpperCase() },
+    });
     if (!role) {
       throw new NotFoundException("Role Not found");
     }
-    // await this.userRoleModel.create({ userId: newUser.id, roleId: role.id });
+    await this.userRoleModel.create({ userId: newUser.id, roleId: role.id });
     await newUser.$set("roles", [role.id]);
     await newUser.save();
     newUser.roles = [role];

@@ -1,5 +1,12 @@
-import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import { Seat } from "src/seat/model/seat.model";
+import {
+  Column,
+  DataType,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Seat } from "../../seat/model/seat.model";
 
 interface createSeatAttr {
   name: string;

@@ -13,9 +13,5 @@ export class SignInAdminUserDto {
     description: "Administrator paroli (kamida 6 ta belgi)",
     example: "Admin123!",
   })
-  @IsStrongPassword(
-    { minLength: 6 },
-    { message: "parol yetarlicha mustahkam emas" }
-  )
   readonly password: string;
 }

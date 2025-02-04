@@ -6,11 +6,11 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { EventType } from "src/event_type/model/event_type.model";
-import { HumanCategory } from "src/human_category/models/human_category.model";
-import { Lang } from "src/lang/models/lang.model";
-import { Ticket } from "src/ticket/model/ticket.model";
-import { Venue } from "src/venue/model/venue.model";
+import { EventType } from "../../event_type/model/event_type.model";
+import { HumanCategory } from "../../human_category/models/human_category.model";
+import { Lang } from "../../lang/models/lang.model";
+import { Ticket } from "../../ticket/model/ticket.model";
+import { Venue } from "../../venue/model/venue.model";
 
 interface IEventCreationAttr {
   name: string;

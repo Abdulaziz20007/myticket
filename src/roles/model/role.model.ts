@@ -1,10 +1,16 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { UserRole } from "src/users/model/user-role-model";
-import { User } from "src/users/model/user.model";
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { UserRole } from "../../users/model/user-role-model";
+import { User } from "../../users/model/user.model";
 
-interface IRolesCreationAttr{
-    value:string,
-    description:string
+interface IRolesCreationAttr {
+  value: string;
+  description: string;
 }
 
 @Table({ tableName: "roles", timestamps: false })

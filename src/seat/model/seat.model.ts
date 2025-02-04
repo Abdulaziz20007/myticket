@@ -1,16 +1,24 @@
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import { SeatType } from "src/seat_type/model/seat_type.model";
-import { Ticket } from "src/ticket/model/ticket.model";
-import { Venue } from "src/venue/model/venue.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { SeatType } from "../../seat_type/model/seat_type.model";
+import { Ticket } from "../../ticket/model/ticket.model";
+import { Venue } from "../../venue/model/venue.model";
 
-
-interface ISeatCreatonAttr{
-    sector:number,
-    row_number:number,
-    number:number,
-    venueId:number,
-    seatTypeId:number,
-    location_in_schema:string
+interface ISeatCreatonAttr {
+  sector: number;
+  row_number: number;
+  number: number;
+  venueId: number;
+  seatTypeId: number;
+  location_in_schema: string;
 }
 
 @Table({ tableName: "seat" })
@@ -50,7 +58,7 @@ export class Seat extends Model<Seat, ISeatCreatonAttr> {
 
   @BelongsTo(() => SeatType)
   seatType: SeatType;
-  
+
   @ForeignKey(() => Venue)
   @Column({
     type: DataType.INTEGER,

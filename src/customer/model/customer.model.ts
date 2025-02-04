@@ -8,10 +8,10 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Cart } from "src/cart/model/cart.model";
-import { CustomerAddress } from "src/customer_address/model/customer_address.model";
-import { CustomerCard } from "src/customer_card/model/customer_card.model";
-import { Lang } from "src/lang/models/lang.model";
+import { Cart } from "../../cart/model/cart.model";
+import { CustomerAddress } from "../../customer_address/model/customer_address.model";
+import { CustomerCard } from "../../customer_card/model/customer_card.model";
+import { Lang } from "../../lang/models/lang.model";
 
 interface ICustomerCreationAttr {
   first_name: string;

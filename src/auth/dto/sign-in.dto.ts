@@ -18,10 +18,7 @@ export class SignInDto {
     description: "Foydalanuvchi paroli (kamida 6 ta belgi)",
     example: "Qwerty123!",
   })
-  @IsStrongPassword(
-    { minLength: 6 },
-    { message: "parol yetarlicha mustahkam emas" }
-  )
+
   readonly password: string;
 
   @ApiProperty({

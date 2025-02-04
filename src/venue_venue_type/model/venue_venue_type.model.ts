@@ -1,15 +1,19 @@
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Venue } from "src/venue/model/venue.model";
-import { VenueType } from "src/venue_type/model/venue_type.model";
+import {
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Venue } from "../../venue/model/venue.model";
+import { VenueType } from "../../venue_type/model/venue_type.model";
 
-
-
-interface IVenueVenueTypeCreationAttr{
-venueId:number,
-venueTypeId:number
+interface IVenueVenueTypeCreationAttr {
+  venueId: number;
+  venueTypeId: number;
 }
 
-@Table({tableName:"venue_venue_type"})
+@Table({ tableName: "venue_venue_type" })
 export class VenueVenueType extends Model<
   VenueVenueType,
   IVenueVenueTypeCreationAttr
@@ -21,5 +25,4 @@ export class VenueVenueType extends Model<
   @ForeignKey(() => VenueType)
   @Column({ type: DataType.INTEGER })
   venueTypeId: number;
-  
 }

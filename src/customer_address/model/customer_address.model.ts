@@ -1,21 +1,27 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Customer } from "src/customer/model/customer.model";
-import { District } from "src/district/model/district.model";
-import { Region } from "src/region/model/region.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Customer } from "../../customer/model/customer.model";
+import { District } from "../../district/model/district.model";
+import { Region } from "../../region/model/region.model";
 
-interface ICustomerAddressAtr{
-    customerId:number,
-    name:string,
-    regionId:number,
-    districtId:number,
-    street:string,
-    house:string,
-    flat:number,
-    location:string,
-    post_index:number,
-    info:string
+interface ICustomerAddressAtr {
+  customerId: number;
+  name: string;
+  regionId: number;
+  districtId: number;
+  street: string;
+  house: string;
+  flat: number;
+  location: string;
+  post_index: number;
+  info: string;
 }
-
 
 @Table({ tableName: "customer_address" })
 export class CustomerAddress extends Model<
@@ -81,7 +87,6 @@ export class CustomerAddress extends Model<
 
   @BelongsTo(() => Region)
   region: Region;
-
 
   @ForeignKey(() => District)
   @Column({

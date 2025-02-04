@@ -1,13 +1,19 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Cart } from "src/cart/model/cart.model";
-import { Ticket } from "src/ticket/model/ticket.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Cart } from "../../cart/model/cart.model";
+import { Ticket } from "../../ticket/model/ticket.model";
 
-interface ICartItemCreationAttr{
-    ticketId:number,
-    cartId:number,
-    quantity:number
+interface ICartItemCreationAttr {
+  ticketId: number;
+  cartId: number;
+  quantity: number;
 }
-
 
 @Table({ tableName: "cart_item" })
 export class CartItem extends Model<CartItem, ICartItemCreationAttr> {

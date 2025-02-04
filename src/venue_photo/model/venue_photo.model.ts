@@ -1,10 +1,15 @@
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript"
-import { Venue } from "src/venue/model/venue.model";
+import {
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { Venue } from "../../venue/model/venue.model";
 
-
-interface IVenuePhotoCreationAttr{
-    url:string
-    venueId:number
+interface IVenuePhotoCreationAttr {
+  url: string;
+  venueId: number;
 }
 
 @Table({ tableName: "venue_photo" })

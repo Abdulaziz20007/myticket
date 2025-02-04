@@ -1,12 +1,16 @@
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import {
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import { User } from "./user.model";
-import { Role } from "src/roles/model/role.model";
+import { Role } from "../../roles/model/role.model";
 
-
-interface IUserRoleCreationAttr{
-    userId:number,
-    roleId:number,
-   
+interface IUserRoleCreationAttr {
+  userId: number;
+  roleId: number;
 }
 
 @Table({ tableName: "user_role" })

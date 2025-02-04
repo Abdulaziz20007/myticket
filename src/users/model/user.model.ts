@@ -5,7 +5,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Role } from "src/roles/model/role.model";
+
+import { Role } from "../../roles/model/role.model";
 import { UserRole } from "./user-role-model";
 
 interface IUserCreationAttr {

@@ -1,18 +1,26 @@
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import { CartItem } from "src/cart_item/model/cart_item.model";
-import { DiscountCoupon } from "src/discount_coupon/model/discount_coupon.model";
-import { Event } from "src/event/model/event.model";
-import { Seat } from "src/seat/model/seat.model";
-import { TicketStatus } from "src/ticket_status/model/ticket_status.model";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { CartItem } from "../../cart_item/model/cart_item.model";
+import { DiscountCoupon } from "../../discount_coupon/model/discount_coupon.model";
+import { Event } from "../../event/model/event.model";
+import { Seat } from "../../seat/model/seat.model";
+import { TicketStatus } from "../../ticket_status/model/ticket_status.model";
 
-
-interface ITicketCreationAttr{
-    eventId:number,
-    seatId:number,
-    price:number,
-    service_fee:number,
-    statusId:number,
-    ticket_type:string
+interface ITicketCreationAttr {
+  eventId: number;
+  seatId: number;
+  price: number;
+  service_fee: number;
+  statusId: number;
+  ticket_type: string;
 }
 
 @Table({ tableName: "ticket" })

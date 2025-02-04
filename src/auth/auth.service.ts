@@ -103,7 +103,7 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException("Email yoki password noto'g'ri");
     }
-    console.log(user.roles[0].value);
+    console.log(user);
 
     const isValidPassword = await bcrypt.compare(
       signInDto.password,

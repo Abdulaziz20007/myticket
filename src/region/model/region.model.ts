@@ -1,13 +1,19 @@
-import { Column, DataType, HasMany, HasOne, Model, Table } from "sequelize-typescript";
-import { CustomerAddress } from "src/customer_address/model/customer_address.model";
-import { District } from "src/district/model/district.model";
-import { Venue } from "src/venue/model/venue.model";
+import {
+  Column,
+  DataType,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { CustomerAddress } from "../../customer_address/model/customer_address.model";
+import { District } from "../../district/model/district.model";
+import { Venue } from "../../venue/model/venue.model";
 
-interface ICreateRegionAttr{
-    name:string,
-    regionId:number
+interface ICreateRegionAttr {
+  name: string;
+  regionId: number;
 }
-
 
 @Table({ tableName: "region" })
 export class Region extends Model<Region, ICreateRegionAttr> {
