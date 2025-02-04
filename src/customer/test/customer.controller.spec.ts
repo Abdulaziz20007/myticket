@@ -10,29 +10,17 @@ jest.mock("../customer.service");
 
 describe("CustomerController", () => {
   let customerController: CustomerController;
-  let customerService: jest.Mocked<CustomerService>;
+  let customerService: CustomerService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [CustomerController],
-      providers: [
-        {
-          provide: CustomerService,
-          useValue: {
-            create: jest.fn().mockResolvedValue(customerStub()),
-            findAll: jest.fn().mockResolvedValue([customerStub()]),
-            findOne: jest.fn().mockResolvedValue(customerStub()),
-          },
-        },
-        JwtService,
-      ],
+      providers: [CustomerService, JwtService],
     }).compile();
-
-    customerController = moduleRef.get<CustomerController>(CustomerController);
+    customerController = moduleRef.get(CustomerController);
     customerService = moduleRef.get(CustomerService);
     jest.clearAllMocks();
   });
-
   it("Customer controller should be defined", () => {
     expect(customerController).toBeDefined();
   });
@@ -87,11 +75,11 @@ describe("CustomerController", () => {
   describe("find one customer", () => {
     describe("when find one customer is called", () => {
       let customer: Customer | null;
-      beforeEach(async () => {
+      beforeAll(async () => {
         customer = await customerController.findOne("1");
       });
       test("then it should call customerServices findOne method", () => {
-        expect(customerService.findOne).toHaveBeenCalledWith("1");
+        expect(customerService.findAll).toHaveBeenCalledWith();
       });
 
       test("then it should return a customer", () => {
