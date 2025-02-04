@@ -115,7 +115,8 @@ export class UsersService {
     });
   }
 
-  remove(id: number) {
-    return this.userModel.destroy({ where: { id } });
+  async remove(id: number) {
+    await this.userModel.destroy({ where: { id } });
+    return { message: `Foydalanuvchi o'chirildi` };
   }
 }
