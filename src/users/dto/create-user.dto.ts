@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsStrongPassword } from "class-validator";
 
 export class CreateUserDto {
   @ApiProperty({
@@ -17,6 +18,7 @@ export class CreateUserDto {
     description: "Parol",
     example: "Qwerty123!",
   })
+  @IsStrongPassword()
   password: string;
 
   @ApiProperty({

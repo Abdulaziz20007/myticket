@@ -22,6 +22,6 @@ export class Lang extends Model<Lang, ILangCreationAttr> {
   @HasMany(() => Event)
   events: Event[];
 
-  @HasMany(() => Customer)
-  customer: Customer[];
+  // @HasMany(() => Customer)
+  // customer: Customer[];
 }

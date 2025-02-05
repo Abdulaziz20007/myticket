@@ -73,21 +73,21 @@ export class Customer extends Model<Customer, ICustomerCreationAttr> {
   })
   hashed_refresh_token: string;
 
-  @ForeignKey(() => Lang)
-  @Column({
-    type: DataType.INTEGER,
-    onDelete: "Restrict",
-  })
-  langId: number;
-  @BelongsTo(() => Lang)
-  lang: Lang;
+  // @ForeignKey(() => Lang)
+  // @Column({
+  //   type: DataType.INTEGER,
+  //   onDelete: "Restrict",
+  // })
+  // langId: number;
+  // @BelongsTo(() => Lang)
+  // lang: Lang;
 
-  @HasMany(() => CustomerCard)
-  customerCards: CustomerCard[];
+  // @HasMany(() => CustomerCard)
+  // customerCards: CustomerCard[];
 
-  @HasOne(() => Cart)
-  customerCart: Cart;
+  // @HasOne(() => Cart)
+  // customerCart: Cart;
 
-  @HasOne(() => CustomerAddress)
-  customerAddress: CustomerAddress;
+  // @HasOne(() => CustomerAddress)
+  // customerAddress: CustomerAddress;
 }
